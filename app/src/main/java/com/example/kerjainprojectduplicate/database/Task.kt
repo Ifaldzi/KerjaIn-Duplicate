@@ -1,8 +1,10 @@
 package com.example.kerjainprojectduplicate.database
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,7 +12,7 @@ import java.util.*
 data class Task(@ColumnInfo(name = "topic")val topic: String,
                 @ColumnInfo(name = "priority")val priority: Int,
                 @ColumnInfo(name = "deadline")val deadline: Calendar,
-                @ColumnInfo(name = "description")val description: String) {
+                @ColumnInfo(name = "description")val description: String) :  Serializable{
 
     @PrimaryKey(autoGenerate = true) var id: Int? = null
 

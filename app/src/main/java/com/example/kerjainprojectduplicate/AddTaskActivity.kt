@@ -1,19 +1,27 @@
 package com.example.kerjainprojectduplicate
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import com.example.kerjainprojectduplicate.database.Task
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
 
     lateinit var dateText: TextView
     lateinit var timeText: TextView
+    var priority = 0
+
+    companion object {
+        const val NEW_TASK_REPLY = "com.example.kerjainprojectduplicate.NEW_TASK_REPLY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +41,23 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         val priorityGroup = findViewById<RadioGroup>(R.id.priority_group)
+        priorityGroup.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.priority_radio_1 -> priority = 1
+                R.id.priority_radio_2 -> priority = 2
+                R.id.priority_radio_3 -> priority = 3
+            }
+        }
 
         val saveButton = findViewById<Button>(R.id.addButton)
         saveButton.setOnClickListener {
             val topic = findViewById<EditText>(R.id.editTextTopic).text
             val taskDescription = findViewById<EditText>(R.id.editTextDescription).text
-            val priority = findViewById<RadioButton>(priorityGroup.checkedRadioButtonId).text
+            val newTask = Task(topic.toString(), 1, calendar, taskDescription.toString())
+            val replyIntent = Intent()
+            replyIntent.putExtra(NEW_TASK_REPLY, newTask)
+            setResult(Activity.RESULT_OK, replyIntent)
+            finish()
         }
     }
 
