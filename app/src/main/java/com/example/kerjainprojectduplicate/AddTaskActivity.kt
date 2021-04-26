@@ -87,7 +87,7 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun showTimePicker(calendar: Calendar) {
-        val timePickerDialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener {
+        val timePickerDialog = TimePickerDialog(this, {
                 _, hourOfDay, minute ->
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     calendar.set(Calendar.MINUTE, minute)

@@ -28,7 +28,6 @@ class TaskListFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_task_list, container, false)
         val recyclerView = root.findViewById<RecyclerView>(R.id.task_recycler_view)
-//        sortTask()
         val taskAdapter = TaskAdapter()
         recyclerView.adapter = taskAdapter
         taskViewModel.tasks.observe(viewLifecycleOwner){tasks ->
@@ -36,15 +35,4 @@ class TaskListFragment : Fragment() {
         }
         return root
     }
-
-//    private fun sortTask(){
-//        tasks.sortWith(Comparator { first: Task, second: Task ->
-//            if(first.priority != second.priority){
-//                first.priority - second.priority
-//            }
-//            else {
-//                (first.deadline.time.time - second.deadline.time.time).toInt()
-//            }
-//        })
-//    }
 }
